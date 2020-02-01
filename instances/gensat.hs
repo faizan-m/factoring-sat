@@ -634,6 +634,21 @@ factorDivQ div n = do
   mapM_ assertFalseGate r
   addComment $ "remainder (zero): " ++ show r
 
+-- Montgomery Multiplication 
+-- Montgomery Addition
+
+montAdd :: (Integral n) => NonNegative n -> SymEval ()
+montAdd a = do
+  let ba = toBits a
+      ad = rippleAdd ba ba
+      ev = eval ad
+      a24 = fromBits ev 
+  (a24, a24)
+
+
+
+
+
 main = do
   args <- getArgs
   pname <- getProgName
@@ -644,3 +659,5 @@ main = do
 
 return []
 runTests = $quickCheckAll
+
+
